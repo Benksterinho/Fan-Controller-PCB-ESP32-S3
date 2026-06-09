@@ -1,0 +1,27 @@
+# KiCad
+*.bak
+*.bck
+*.kicad_prl
+*.kicad_sch-bak
+*.kicad_pcb-bak
+*.tmp
+*.kicad_pro.lck
+*.kicad_sch.lck
+*.kicad_pcb.lck
+
+# KiCad local history / reports
+hardware/kicad/fan_controller_revA/.history/
+hardware/kicad/fan_controller_revA/*.rpt
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Generated artifacts
+*.log
+*.zip
+*.tar.gz
+
+# LCSC imported symbols (keep local, do not version)
+hardware/kicad/fan_controller_revA/libs/lcsc/symbols/*.kicad_sym

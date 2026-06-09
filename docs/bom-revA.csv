@@ -1,0 +1,45 @@
+MPN,Value,Footprint,Qty,References,LCSC_Code,Status,Sheet,Notes
+# All resistors are 0603 unless otherwise noted. Capacitors are 0603 unless voltage/capacitance/space requires 0402. See sheet-specs for exceptions.
+# K7803/K7812 module sourcing policy: keep one vetted pin-compatible backup per rail in BOM notes and re-check stock at order freeze.
+Conn_Screw_5.08mm_1x2,Screw Terminal 2-pin 5.08mm,TerminalBlock_Altech:Altech_AKZ950_1x02_P5.08mm_45-Degree,1,J_PWR,C395939,LOCKED,InputProtection,Power input 19-24V supported (17-18V not guaranteed with current Schottky reverse-polarity stage); 5.08mm pitch 2-pin screw terminal (THT); alt: C395940
+DIODES_SMBJ26A-13-F,SMBJ26A,Diode_SMD:D_SMB,1,D_TVS_IN,C135062,LOCKED,InputProtection,Input transient clamp TVS across VIN_RAW to GND near J_PWR; DIODES SMBJ26A-13-F (SMB) selected
+SS36,SS36,Diode_SMD:D_SMA,1,D1,C16015,LOCKED,InputProtection,60V 3A SMA Schottky for reverse polarity protection at up to 24V input; alt: SS34 (40V, 3A, C8678)
+Littelfuse-0466002.NRHF,2A/63V,Fuse:Fuse_1206_3216Metric,1,F1,C3105,LOCKED,InputProtection,Pragmatic Rev A policy: 2A 1206 fuse (fast-acting acceptable); selected Littelfuse 0466002.NRHF
+Cap_100n_50V_X7R_0402,100nF/50V,Capacitor_SMD:C_0402_1005Metric,1,C_IN_BYP,C307331,LOCKED,InputProtection,100nF X7R 0402
+Cap_100u_50V_Input,100uF/50V,Capacitor_SMD:C_Radial_SMD_8.0x10.5,1,C_IN_BULK,C72480,LOCKED,InputProtection,Bulk input reservoir across VIN_PROTECTED to GND near connector/diode output; polarized (+ to VIN_PROTECTED, - to GND)
+K7812-1000R3,K7812-1000,Module:SIP_11.6x7.6mm_3pin,1,U1,C5369648,LOCKED,Power12V,K7812-1000R3 12V 1A SIP-3 DC/DC module (YLPTEC); verified in stock; backup: C969026 (DEXU K7812-1000R3)
+Cap_100u_50V,100uF/50V,Capacitor_SMD:C_Radial_SMD_8.0x10.5,1,C12_IN_BULK,C72480,LOCKED,Power12V,Input bulk decap for K7812; CAP-REVIEW: candidate to drop — C_IN_BULK (InputProtection) already buffers VIN_PROTECTED; only retain if trace from C_IN_BULK to U1 input pin is >4cm or narrow; see cap-rationalization note in bom-revA-status.md
+Cap_1u_50V_X7R_0603,1uF/50V X7R,Capacitor_SMD:C_0603_1608Metric,1,C12_IN_BYP,C15849,LOCKED,Power12V,HF input bypass for K7812 on VIN_PROTECTED rail (19-24V supported)
+Cap_47u_25V_12VOUT,47uF/25V,Capacitor_SMD:C_Radial_SMD_6.3x7.7,1,C12_OUT_BULK,C3029614,LOCKED,Power12V,Output bulk decap at K7812 VOUT to handle fan startup and PWM load transients
+Cap_100n_50V_X7R_0402_12VOUT,100nF/50V X7R,Capacitor_SMD:C_0402_1005Metric,1,C12_OUT_BYP,C307331,LOCKED,Power12V,Output HF bypass at K7812 VOUT for switching noise suppression
+EVISUN-K7803-1000R3,K7803-1000,Module:SIP_11.6x7.6mm_3pin,1,U2,C50396472,LOCKED,Power3V3,K7803-1000R3 3.3V 1A SIP-3 DC/DC module (EVISUN); verified in stock; backup: C5369647 (YLPTEC K7803-1000R3)
+Cap_100u_50V,100uF/50V,Capacitor_SMD:C_Radial_SMD_8.0x10.5,1,C33_IN_BULK,C72480,LOCKED,Power3V3,Input bulk decap for K7803; same stocked 100uF/50V part used on VIN input and Power12V; CAP-REVIEW: candidate to drop — same argument as C12_IN_BULK; both modules share VIN_PROTECTED and C_IN_BULK provides upstream bulk; drop if routing is tight; see cap-rationalization note in bom-revA-status.md
+Cap_10u_50V_X5R_1210,10uF/50V X5R,Capacitor_SMD:C_1210_3225Metric,1,C33_IN_BYP,C380537,LOCKED,Power3V3,HF input bypass for K7803 on VIN_PROTECTED rail; Samsung CL32A106KBJNNNE; CAP-REVIEW: 1210 footprint is oversized for a bypass cap — candidate to replace with 1uF 0603 (same as C12_IN_BYP, C15849, already in BOM); saves significant board area with no functional loss; see cap-rationalization note in bom-revA-status.md
+Cap_100u_10V_low_ESR,100uF/10V low-ESR,Capacitor_SMD:C_Radial_SMD_6.3x7.7,1,C33_OUT_BULK,C2887276,LOCKED,Power3V3,Output bulk cap for K7803
+Cap_10u_16V_X5R_0603,10uF/16V X5R,Capacitor_SMD:C_0603_1608Metric,1,C33_OUT_BYP,C92487,LOCKED,Power3V3,HF output bypass for K7803; Samsung CL10A106MO8NQNC
+ESP32-S3-WROOM-1-N16R8,ESP32-S3-WROOM-1-N16R8,Module:ESP32-S3-WROOM-1,1,U3,C2913202,LOCKED,ESP32S3Core,Espressif ESP32-S3-WROOM-1-N16R8; alt: C2913201 (N8R8)
+Cap_100n_10V_X7R_0402,100nF/10V X7R,Capacitor_SMD:C_0402_1005Metric,1,C_DEC,C307331,LOCKED,ESP32S3Core,100nF/50V X7R 0402; alt: C1525
+Cap_22u_16V_X5R_1206,22uF/16V X5R,Capacitor_SMD:C_1206_3216Metric,1,C_BULK,C90146,LOCKED,ESP32S3Core,22uF/16V X5R 1206 bulk cap for ESP32 local burst current support; Samsung CL31A226KOHNNNE
+Res_10k_0603,10kOhm,Resistor_SMD:R_0603_1608Metric,2,R_EN R_BOOT,C99198,LOCKED,ESP32S3Core,10k 0603 pull-ups for EN and GPIO0_BOOT; manual browser verification confirmed MPN RC0603JR-0710KL, package 0603, and in-stock quantity
+CL10B105KB8NNNC,1uF/50V X7R,Capacitor_SMD:C_0603_1608Metric,1,C_EN,C15849,LOCKED,ESP32S3Core,EN reset RC capacitor per Espressif recommendation (typical R=10k and C=1uF); tune only if rail ramp behavior requires it
+TL3342F160QG,Momentary tactile switch,Button_Switch_SMD:SW_SPST_TL3342,2,SW_RESET SW_BOOT,C2886898,LOCKED,ESP32S3Core,Manual reset and BOOT buttons; TL3342-compatible SMD tactile
+HX PZ2.54-1x4P WZ,4-pin fan header,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal,1,J_FAN,C32713263,LOCKED,Fan4Wire,1x4 right-angle male header for fan cable breakout; hanxia HX PZ2.54-1x4P WZ, 2.54mm single-row TH right-angle (Intel 4-pin PWM net order: 1-GND, 2-12V, 3-TACH, 4-PWM)
+MMBT3904_Q1,NPN SOT-23,Package_TO_SOT_SMD:SOT-23,1,Q1,C181119,LOCKED,Fan4Wire,PWM open-collector sink; alt C111113 C916374
+Res_2k2_0603,2.2kOhm,Resistor_SMD:R_0603_1608Metric,1,R_BASE,C4190,LOCKED,Fan4Wire,Q1 base current limit
+Res_100k_0603,100kOhm,Resistor_SMD:R_0603_1608Metric,1,R_BPD,C25803,LOCKED,Fan4Wire,Q1 base pull-down; alt: C21198
+Res_10k_0603_fan,10kOhm,Resistor_SMD:R_0603_1608Metric,1,R_TACH_PU,C98220,LOCKED,Fan4Wire,Tach pull-up to 3V3
+Res_1k_0603_fan,1kOhm,Resistor_SMD:R_0603_1608Metric,1,R_TACH_SERIES,C22548,LOCKED,Fan4Wire,Tach GPIO series protection
+onsemi-MBR0520LT1G,MBR0520LT1G,Diode_SMD:D_SOD-123,1,D_TACH_CLAMP,C23848,LOCKED,Fan4Wire,Tach over-voltage clamp; cathode to 3V3 and anode to FAN_TACH (MCU side)
+Cap_47u_25V_FAN,47uF/25V,Capacitor_SMD:C_Radial_SMD_6.3x7.7,1,C_FAN_BULK,C3029614,LOCKED,Fan4Wire,Local 12V bulk at fan connector; Lelon VUA470M1ETR-0607 (SMD,D6.3xL7.7mm); CAP-REVIEW: optional — can drop if J_FAN is placed within ~3cm of C12_OUT_BULK with wide/direct 12V copper between them; keep if fan connector is far from power stage; see cap-rationalization note in bom-revA-status.md
+Cap_100n_25V_X7R_0402,100nF/25V,Capacitor_SMD:C_0402_1005Metric,1,C_FAN_HF,C307331,LOCKED,Fan4Wire,HF bypass at J_FAN 12V; same part as C_IN_BYP
+Conn_PinHeader_2.54mm_1x8,8-pin display header,Connector_PinHeader_2.54mm:PinHeader_1x08_P2.54mm_Horizontal,1,J_DISP,C32713267,LOCKED,DisplayHeader_ST7789,1x8 right-angle male header for ST7789 cable breakout; hanxia HX PZ2.54-1x8P WZ, 2.54mm single-row TH right-angle
+Res_33R_0603,33Ohm,Resistor_SMD:R_0603_1608Metric,5,R_SCK R_MOSI R_CS R_DC R_RST,C2909394,LOCKED,DisplayHeader_ST7789,SPI signal damping; FOJAN FRC0603F33R0TS, 33R 0603 thick-film, stocked
+Res_0R_DNP_0603,0Ohm DNP,Resistor_SMD:R_0603_1608Metric,1,R_MISO,C95177,LOCKED,DisplayHeader_ST7789,MISO DNP unless needed; YAGEO RC0603JR-070RL, 0R 0603 stocked optional link
+Cap_100n_10V_0402_disp,100nF/10V,Capacitor_SMD:C_0402_1005Metric,1,C_DISP_VCC,C307331,LOCKED,DisplayHeader_ST7789,Bypass at header VCC; same part as C_IN_BYP
+MMBT3904_dispbl,NPN SOT-23,Package_TO_SOT_SMD:SOT-23,1,Q_BL,C181119,LOCKED,DisplayHeader_ST7789,Display BL open-collector sink transistor; same part as Q1 and auto-reset NPNs
+Res_2k2_0603_dispbl,2.2kOhm,Resistor_SMD:R_0603_1608Metric,1,R_BL_BASE,C4190,LOCKED,DisplayHeader_ST7789,Base current limit for Q_BL open-collector stage
+Res_100k_0603_dispbl,100kOhm,Resistor_SMD:R_0603_1608Metric,1,R_BL_PD,C25803,LOCKED,DisplayHeader_ST7789,Base pull-down for Q_BL open-collector stage
+Conn_PinHeader_2.54mm_1x6,6-pin programming header,Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Horizontal,1,J_PROG,C42453955,LOCKED,ExternalProgrammingHeader,External right-angle programming header (GND 3V3 UART_TX UART_RX EN_RESET GPIO0_BOOT) for external downloader cable; hanxia HX PZ2.54-1x6P WZ-P
+PZ2.54-2X5P-H25,2x5 expansion header,Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical,1,J_EXP,C42431818,LOCKED,OptionalExpansionHeader,2x5 2.54mm GPIO expansion
+Res_33R_0603_exp,33Ohm,Resistor_SMD:R_0603_1608Metric,8,R_EXP1 R_EXP2 R_EXP3 R_EXP4 R_EXP5 R_EXP6 R_EXP7 R_EXP8,C2909394,LOCKED,OptionalExpansionHeader,Series protection on each GPIO; same 33R 0603 used on display lines
+0805L050WR,Polyfuse 500mA,Fuse:Fuse_0805_2012Metric,1,F_EXP,C207022,LOCKED,OptionalExpansionHeader,3V3 expansion protection; Littelfuse 6V 500mA resettable PTC 0805
